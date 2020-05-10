@@ -30,6 +30,9 @@ label.y = 20;
 polygonSeries.events.on("over", over);
 polygonSeries.events.on("out", out);
 
+var info = document.getElementById("info");
+info.innerHTML = "<h5> Click/Tap on map for country specific data.</h5>";
+
 polygonTemplate.events.on("hit", function(ev) {
   var data = ev.target.dataItem.dataContext;
   var info = document.getElementById("info");
