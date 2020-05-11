@@ -111,9 +111,9 @@ polygonTemplate.events.on("hit", function(ev) {
 
   var info = document.getElementById("info");
   info.innerHTML = "<h3>" + data.id +"(" + data.countryName + ")" + "</h3>"+
-  "<h4>"+"Total Cases : " + data.value  + "</h4>"+
-  "<h4>"+"Total Population : " + data.population  + "</h4>"+
-  "<h4>"+"First Case : " + data.firstCase  + "</h4>";
+  "<h4>"+"Total Cases " + data.value  + "</h4>"+
+  "<h4>"+"Total Population " + data.population  + "</h4>"+
+  "<h4>"+"First Case " + data.firstCase  + "</h4>";
   var stateId = data.id;
   showState(stateId, data.name, event.target);
 });
