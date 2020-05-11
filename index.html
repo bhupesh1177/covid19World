@@ -23,24 +23,27 @@
     <script type='text/javascript' src="js/data.js"></script>
     <script type='text/javascript' src="js/worldAddedData.js"></script>
     <script type='text/javascript' src="js/countryWiseDateWiseData.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
     <!-- Chart code -->
     <script src="js/initializingWorldMap.js"></script>
+    <script src="js/colorChanger.js"></script>
     
 </head>
-<body>
-<h1 class="mb-10">COVID-19 Cases live count</h1>
+<body style="background-color: white;">
+<h1 id="heading" style="background-color: white;">COVID-19 Cases live count</h1>
+<button class="btn mx-auto" onclick="changeBGcolor()"><i class="fa fa-sun-o"></i></button>
 <br>
 <br>
-<div class="row text-left ml-5">
-    <div class="col-md-10 col-sm-12">
-            <div id="chartdiv"></div>
+<div id="div1" class="row text-left ml-5" style="background-color: white;">
+    <div id="div2" class="col-md-10 col-sm-12" style="background-color: white;">
+            <div id="chartdiv" style="background-color: white;"></div>
     </div>
-    <div class="col-md-3 col-sm-2">
-      <div id="info"></div>
+    <div id="div3" class="col-md-3 col-sm-2" style="background-color: white;">
+      <div id="info" style="background-color: white;"></div>
     </div>
-    <div class="col-md-7 col-sm-10">
-            <div id="graphdiv"></div>
+    <div id="div4" class="col-md-7 col-sm-10" style="background-color: white;">
+            <div id="graphdiv" style="background-color: white;"></div>
     </div>
 </div>
       
