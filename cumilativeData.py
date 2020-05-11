@@ -12,13 +12,16 @@ jsonList = []
 dic = {}
 
 count = 0
+deathCount = 0
 for i in L:
     temp_df = data[data['dateRep']==i]
     data1 = {}
     count = count + int(temp_df['cases'].sum())
+    deathCount = deathCount + int(temp_df['deaths'].sum())
 
     data1['value'] = count
     data1['date'] = temp_df['dateRep'].iloc[0]
+    data1['deathValue'] = deathCount
     json_data = json.dumps(data1)
     jsonList.append(json_data)
         

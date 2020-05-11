@@ -8,7 +8,33 @@
   #graphdiv {
     height : 40%;
   }
+  .map-stats {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+    position: relative;
+    width: 100%;
+    z-index: 10;
+}
 
+.map-stats .stats {
+    width: 150px;
+    margin-bottom: 1.8rem;
+    margin-top: 1.8rem;
+    margin-left: 2rem;
+    text-align: center;
+    padding-bottom: .75rem;
+    padding-top: .75rem;
+    border-radius: 6%;
+    opacity: 85%;
+    color: black;
+    border-style: solid;
+}
+.map-stats .stats .stats-bottom {
+    display: flex;
+    flex-direction: column;
+}
 </style>
     <!-- Resources -->
     <script src="https://www.amcharts.com/lib/4/core.js"></script>
@@ -21,6 +47,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script type='text/javascript' src="js/data.js"></script>
     <script type='text/javascript' src="js/worldAddedData.js"></script>
     <script type='text/javascript' src="js/countryWiseDateWiseData.js"></script>
@@ -29,15 +56,40 @@
     <!-- Chart code -->
     <script src="js/initializingWorldMap.js"></script>
     <script src="js/colorChanger.js"></script>
+
     
 </head>
 <body style="background-color: white;">
 
-    <h1 id="heading" style="background-color: white; margin: 20;">COVID-19 Cases live count</h1>
-    &nbsp;&nbsp;&nbsp;
+    <div class="map-stats">
+      <h1 id="heading" style="background-color: white; margin: 20;">COVID-19 Cases live count</h1>
+      <div class="stats" style="background-color: #d4942f; border-color: #613700;">
+      <h5>Total Cases</h5>
+      <div class="stats-bottom">
+        <h5 id="caseData"></h5>
+        <script>
+          var len = worldAddedData.length;
+          document.getElementById("caseData").innerHTML = worldAddedData[len-1].value;
+        </script>
+      </div>
+    </div>
+    <div class="stats" style="background-color: #94193e; border-color: #661313; ">
+      <h5>Total Deaths</h5>
+      <div class="stats-bottom">
+        <h5 id="deathData"></h5>
+        <script>
+          var len = worldAddedData.length;
+          document.getElementById("deathData").innerHTML = worldAddedData[len-1].deathValue;
+        </script>
+      </div>
+    </div>
+  </div>
+  &nbsp;&nbsp;&nbsp;
     <button class="btn btn-secondary btn-lg" onclick="changeBGcolor()"><i class="fa fa-sun-o"></i></button>
 <br>
 <br>
+
+
 <div id="div1" class="row text-left ml-5" style="background-color: white;">
     <div id="div2" class="col-md-10 col-sm-12" style="background-color: white;">
             <div id="chartdiv" style="background-color: white;"></div>
