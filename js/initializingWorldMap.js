@@ -35,7 +35,7 @@ polygonSeries.events.on("over", over);
 polygonSeries.events.on("out", out);
 
 var info = document.getElementById("info");
-info.innerHTML = "<h5> Click/Tap on map for country specific data.</h5>";
+info.innerHTML = "<h5 style=\"margin-left : 7px;\"> Click/Tap on map for country specific data.</h5>";
 
 
 
@@ -110,10 +110,10 @@ polygonTemplate.events.on("hit", function(ev) {
   var data = ev.target.dataItem.dataContext;
 
   var info = document.getElementById("info");
-  info.innerHTML = "<h3>" + data.id +"(" + data.countryName + ")" + "</h3>"+
-  "<h4>"+"Total Cases " + data.value  + "</h4>"+
-  "<h4>"+"Total Population " + data.population  + "</h4>"+
-  "<h4>"+"First Case " + data.firstCase  + "</h4>";
+  info.innerHTML = "<h3 style=\"margin-left : 7px;\">" + data.id +"(" + data.countryName + ")" + "</h3>"+
+  "<h4 style=\"margin-left : 7px;\">"+"Total Cases " + data.value  + "</h4>"+
+  "<h4 style=\"margin-left : 7px;\">"+"Total Population " + data.population  + "</h4>"+
+  "<h4 style=\"margin-left : 7px;\">"+"First Case " + data.firstCase  + "</h4>";
   var stateId = data.id;
   showState(stateId, data.name, event.target);
 });
