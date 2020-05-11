@@ -15,6 +15,13 @@ for i in L:
     data1['id'] = temp_df['geoId'].iloc[0]
     data1['population'] = int(temp_df['popData2018'].iloc[0])
     data1['countryName'] = temp_df['countriesAndTerritories'].iloc[0]
+    temp_df['dateRep'] = temp_df['dateRep'].dt.strftime('%Y-%m-%d')
+    K = list(temp_df['dateRep'])
+    K = K[::-1] 
+    data1['allDates'] = K
+    M = list(temp_df['cases'])
+    M = M[::-1] 
+    data1['allDatesCases'] = M
     temp_df1 = temp_df[temp_df['cases']!=0]
     data1['firstCase'] = str(temp_df1['dateRep'].iloc[-1]) 
     json_data = json.dumps(data1)
