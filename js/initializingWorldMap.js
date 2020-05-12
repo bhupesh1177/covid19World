@@ -125,9 +125,9 @@ mainButtonContainer.width = am4core.percent(100);
 mainButtonContainer.height = am4core.percent(100);
 mainButtonContainer.layout = "horizontal";
 var mapGlobeSwitch = mainButtonContainer.createChild(am4core.SwitchButton);
-  mapGlobeSwitch.rightLabel.text = "Show closed airports";
-  mapGlobeSwitch.rightLabel.fill = am4core.color("black");
-  mapGlobeSwitch.scale = 1.3;
+mapGlobeSwitch.scale = 1.3;  
+mapGlobeSwitch.rightLabel.text = "Show closed airports";
+mapGlobeSwitch.rightLabel.fill = am4core.color("black");
 
 var imageSeries = chart.series.push(new am4maps.MapImageSeries());
 imageSeries.mapImages.template.propertyFields.longitude = "longitude";
