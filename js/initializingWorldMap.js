@@ -192,7 +192,9 @@ function showState(id, stateName, polygon) {
 }
 
 var mainButtonContainer = am4core.create("toggleButtonDiv", am4core.Container);
-
+mainButtonContainer.width = am4core.percent(100);
+mainButtonContainer.height = am4core.percent(100);
+mainButtonContainer.layout = "horizontal";
 var mapGlobeSwitch = mainButtonContainer.createChild(am4core.SwitchButton);
   mapGlobeSwitch.rightLabel.text = "Show closed airports";
   mapGlobeSwitch.rightLabel.fill = am4core.color("black");
