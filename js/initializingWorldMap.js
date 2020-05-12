@@ -119,6 +119,72 @@ polygonTemplate.events.on("hit", function(ev) {
   showState(stateId, data.name, event.target);
 });
 
+
+var mainButtonContainer = am4core.create("toggleButtonDiv", am4core.Container);
+mainButtonContainer.width = am4core.percent(100);
+mainButtonContainer.height = am4core.percent(100);
+mainButtonContainer.layout = "horizontal";
+var mapGlobeSwitch = mainButtonContainer.createChild(am4core.SwitchButton);
+  mapGlobeSwitch.rightLabel.text = "Show closed airports";
+  mapGlobeSwitch.rightLabel.fill = am4core.color("black");
+
+var imageSeries = chart.series.push(new am4maps.MapImageSeries());
+imageSeries.mapImages.template.propertyFields.longitude = "longitude";
+imageSeries.mapImages.template.propertyFields.latitude = "latitude";
+imageSeries.mapImages.template.tooltipText = "{cityName}";
+imageSeries.mapImages.template.propertyFields.url = "url";
+
+var circle = imageSeries.mapImages.template.createChild(am4core.Circle);
+circle.radius = 3;
+circle.propertyFields.fill = "color";
+
+var circle2 = imageSeries.mapImages.template.createChild(am4core.Circle);
+circle2.radius = 3;
+circle2.propertyFields.fill = "color";
+
+
+circle2.events.on("inited", function(event){
+  animateBullet(event.target);
+})
+
+
+function animateBullet(circle) {
+    var animation = circle.animate([{ property: "scale", from: 1, to: 5 }, { property: "opacity", from: 1, to: 0 }], 1000, am4core.ease.circleOut);
+    animation.events.on("animationended", function(event){
+      animateBullet(event.target.object);
+    })
+}
+
+var myairportdata = airportsData;
+var airportDataLen = airportsData.length;
+var closedAirportOnly = [];
+var count = 0;
+
+for (var i = 0; i<airportDataLen; i++) {
+  myairportdata[i].latitude = Number(myairportdata[i].latitude);
+  myairportdata[i].longitude = Number(myairportdata[i].longitude);
+  if (myairportdata[i].Closed == true) {
+    closedAirportOnly[count] = myairportdata[i];
+    count = count+1;
+  }
+}
+console.log(myairportdata);
+console.log(closedAirportOnly);
+
+var colorSet = new am4core.ColorSet();
+imageSeries.hidden = true;
+imageSeries.data = closedAirportOnly;
+
+mapGlobeSwitch.events.on("toggled", function() {
+  if (mapGlobeSwitch.isActive) {
+    imageSeries.show();
+  } else {
+    imageSeries.hide();
+  }
+})
+
+
+
 series1.tooltipText = "{value}"
 series1.strokeWidth = 2;
 series1.minBulletDistance = 15;
@@ -190,69 +256,6 @@ function showState(id, stateName, polygon) {
 
    }
 }
-
-var mainButtonContainer = am4core.create("toggleButtonDiv", am4core.Container);
-mainButtonContainer.width = am4core.percent(100);
-mainButtonContainer.height = am4core.percent(100);
-mainButtonContainer.layout = "horizontal";
-var mapGlobeSwitch = mainButtonContainer.createChild(am4core.SwitchButton);
-  mapGlobeSwitch.rightLabel.text = "Show closed airports";
-  mapGlobeSwitch.rightLabel.fill = am4core.color("black");
-
-var imageSeries = chart.series.push(new am4maps.MapImageSeries());
-imageSeries.mapImages.template.propertyFields.longitude = "longitude";
-imageSeries.mapImages.template.propertyFields.latitude = "latitude";
-imageSeries.mapImages.template.tooltipText = "{cityName}";
-imageSeries.mapImages.template.propertyFields.url = "url";
-
-var circle = imageSeries.mapImages.template.createChild(am4core.Circle);
-circle.radius = 3;
-circle.propertyFields.fill = "color";
-
-var circle2 = imageSeries.mapImages.template.createChild(am4core.Circle);
-circle2.radius = 3;
-circle2.propertyFields.fill = "color";
-
-
-circle2.events.on("inited", function(event){
-  animateBullet(event.target);
-})
-
-
-function animateBullet(circle) {
-    var animation = circle.animate([{ property: "scale", from: 1, to: 5 }, { property: "opacity", from: 1, to: 0 }], 1000, am4core.ease.circleOut);
-    animation.events.on("animationended", function(event){
-      animateBullet(event.target.object);
-    })
-}
-
-var myairportdata = airportsData;
-var airportDataLen = airportsData.length;
-var closedAirportOnly = [];
-var count = 0;
-
-for (var i = 0; i<airportDataLen; i++) {
-  myairportdata[i].latitude = Number(myairportdata[i].latitude);
-  myairportdata[i].longitude = Number(myairportdata[i].longitude);
-  if (myairportdata[i].Closed == true) {
-    closedAirportOnly[count] = myairportdata[i];
-    count = count+1;
-  }
-}
-console.log(myairportdata);
-console.log(closedAirportOnly);
-
-var colorSet = new am4core.ColorSet();
-imageSeries.hidden = true;
-imageSeries.data = closedAirportOnly;
-
-mapGlobeSwitch.events.on("toggled", function() {
-  if (mapGlobeSwitch.isActive) {
-    imageSeries.show();
-  } else {
-    imageSeries.hide();
-  }
-})
 
 console.log(graph.data);
 });
