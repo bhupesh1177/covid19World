@@ -119,7 +119,7 @@ polygonTemplate.events.on("hit", function(ev) {
   showState(stateId, data.name, event.target);
 });
 
-
+//airport button
 var mainButtonContainer = am4core.create("toggleButtonDiv", am4core.Container);
 mainButtonContainer.width = am4core.percent(100);
 mainButtonContainer.height = am4core.percent(100);
@@ -127,6 +127,7 @@ mainButtonContainer.layout = "horizontal";
 var mapGlobeSwitch = mainButtonContainer.createChild(am4core.SwitchButton);
   mapGlobeSwitch.rightLabel.text = "Show closed airports";
   mapGlobeSwitch.rightLabel.fill = am4core.color("black");
+  mapGlobeSwitch.scale = 1.3;
 
 var imageSeries = chart.series.push(new am4maps.MapImageSeries());
 imageSeries.mapImages.template.propertyFields.longitude = "longitude";
@@ -183,7 +184,7 @@ mapGlobeSwitch.events.on("toggled", function() {
   }
 })
 
-
+//airport button closed
 
 series1.tooltipText = "{value}"
 series1.strokeWidth = 2;
