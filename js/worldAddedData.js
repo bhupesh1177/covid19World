@@ -121,14 +121,16 @@ var worldAddedData = [
   {"value": 2980763, "date": "2020-04-28", "deathValue": 214139},
   {"value": 3053625, "date": "2020-04-29", "deathValue": 220657},
   {"value": 3130708, "date": "2020-04-30", "deathValue": 227328},
-  {"value": 3215148, "date": "2020-05-01", "deathValue": 232862},
-  {"value": 3308112, "date": "2020-05-02", "deathValue": 238700},
+  {"value": 3215688, "date": "2020-05-01", "deathValue": 232862},
+  {"value": 3307562, "date": "2020-05-02", "deathValue": 238700},
   {"value": 3388680, "date": "2020-05-03", "deathValue": 243469},
   {"value": 3467268, "date": "2020-05-04", "deathValue": 247156},
   {"value": 3544707, "date": "2020-05-05", "deathValue": 251155},
   {"value": 3624010, "date": "2020-05-06", "deathValue": 257107},
   {"value": 3714037, "date": "2020-05-07", "deathValue": 263494},
-  {"value": 3808483, "date": "2020-05-08", "deathValue": 269242},
-  {"value": 3898600, "date": "2020-05-09", "deathValue": 274510},
-  {"value": 3985340, "date": "2020-05-10", "deathValue": 278807}
+  {"value": 3808459, "date": "2020-05-08", "deathValue": 269242},
+  {"value": 3898576, "date": "2020-05-09", "deathValue": 274510},
+  {"value": 3986128, "date": "2020-05-10", "deathValue": 278950},
+  {"value": 4065770, "date": "2020-05-11", "deathValue": 282360},
+  {"value": 4136414, "date": "2020-05-12", "deathValue": 285753}
 ]
