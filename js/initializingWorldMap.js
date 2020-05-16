@@ -35,10 +35,30 @@ polygonSeries.events.on("over", over);
 polygonSeries.events.on("out", out);
 
 
+var fltHeader = document.getElementById("flightHeader");
+var fltChange = document.getElementById("flightChange");
+var keys = Object.keys(flightData);
+console.log(keys);
+var totalJanTraffic = 0;
+var totalAprTraffic = 0;
+for(var i=0; i<keys.length; i++) {
+  totalJanTraffic = totalJanTraffic +flightData[keys[0]][0].originCount+flightData[keys[0]][0].destCount;
+  totalAprTraffic = totalAprTraffic +flightData[keys[0]][3].originCount+flightData[keys[0]][3].destCount;
+}
+fltHeader.innerHTML = "Total change in world air traffic (prime airports)";
+fltChange.innerHTML = Math.round(((totalAprTraffic-totalJanTraffic)/totalJanTraffic) * 100) + "%"; 
+
 var info = document.getElementById("info");
 info.innerHTML = "<h5 style=\"margin-left : 7px;\"> Click/Tap on map for country specific data.</h5>";
 
-
+var curreconomy = document.getElementById("currEconomy");
+curreconomy.innerHTML = "-3";
+var preveconomy = document.getElementById("prevEconomy");
+preveconomy.innerHTML = "2.9";
+var curreconomyheader = document.getElementById("currEconomyHeader");
+curreconomyheader.innerHTML = "Real GDP growth   World (2020)";
+var preveconomyheader = document.getElementById("prevEconomyHeader");
+preveconomyheader.innerHTML = "Real GDP growth   World (2019)";
 
 
 function over(ev) {
@@ -109,14 +129,69 @@ var selectedStateName;
 
 polygonTemplate.events.on("hit", function(ev) {
   var data = ev.target.dataItem.dataContext;
+  console.log(data.name);
+  var ecnmyData = economyData;
+  var currGDP;
+  var prevGDP;
+  for (var i = 0; i < ecnmyData.length; i++) {
+    if(ecnmyData[i].id == data.id) {
+      currGDP = ecnmyData[i].currYearGDP;
+      prevGDP = ecnmyData[i].prevYearGDP;
+    }
+  }
 
+  if (data.value != null) {
   var info = document.getElementById("info");
-  info.innerHTML = "<h3 style=\"margin-left : 7px;\">" + data.id +"(" + data.countryName + ")" + "</h3>"+
+  info.innerHTML = "<h3 style=\"margin-left : 7px;\">" + data.id +"(" + data.name + ")" + "</h3>"+
   "<h4 style=\"margin-left : 7px;\">"+"Total Cases " + data.value  + "</h4>"+
   "<h4 style=\"margin-left : 7px;\">"+"Total Population " + data.population  + "</h4>"+
   "<h4 style=\"margin-left : 7px;\">"+"First Case " + data.firstCase  + "</h4>";
+  } else {
+    var info = document.getElementById("info");
+    info.innerHTML = "<h3 style=\"margin-left : 7px;\">" + data.id +"(" + data.name + ")" + "</h3>"+
+    "<h4 style=\"margin-left : 7px;\">"+"Total Cases : Data not available</h4>";
+  }
+
+  if (currGDP != null) {
+    var curreconomy = document.getElementById("currEconomy");
+    curreconomy.innerHTML = currGDP;
+    var preveconomy = document.getElementById("prevEconomy");
+    preveconomy.innerHTML = prevGDP;
+    var curreconomyheader = document.getElementById("currEconomyHeader");
+    curreconomyheader.innerHTML = "Real GDP growth <br>"+data.name+ " (2020)";
+    var preveconomyheader = document.getElementById("prevEconomyHeader");
+    preveconomyheader.innerHTML = "Real GDP growth <br>"+data.name+ " (2019)";
+  } else {
+    var curreconomy = document.getElementById("currEconomy");
+    curreconomy.innerHTML = "Data not available";
+    var preveconomy = document.getElementById("prevEconomy");
+    preveconomy.innerHTML = "Data not available";
+    var curreconomyheader = document.getElementById("currEconomyHeader");
+    curreconomyheader.innerHTML = "Real GDP growth <br>"+data.name+ " (2020)";
+    var preveconomyheader = document.getElementById("prevEconomyHeader");
+    preveconomyheader.innerHTML = "Real GDP growth <br>"+data.name+ " (2019)";
+  }
+
+  var fltHeader = document.getElementById("flightHeader");
+  var fltChange = document.getElementById("flightChange");
+  var odflightData = flightData;
+  if (odflightData[data.id] != null) {
+    var historicTraffic = odflightData[data.id][0].originCount + odflightData[data.id][0].destCount;
+    var currentTraffic = odflightData[data.id][3].originCount + odflightData[data.id][3].destCount;
+    var percentChange = ((currentTraffic-historicTraffic)/historicTraffic) * 100;
+    console.log(odflightData[data.id][0]);
+    fltHeader.innerHTML = "Percentage change for traffic at prime airports in "+data.name;
+    fltChange.innerHTML = Math.round(percentChange)+"%";
+  } else {
+    fltHeader.innerHTML = "Airport traffic data not currently available for "+data.name;
+    fltChange.innerHTML = ""; 
+  }
+
+  //for polygon data population
   var stateId = data.id;
-  showState(stateId, data.name, event.target);
+  if(data.value != null) {
+   showState(stateId, data.name, event.target);
+  }
 });
 
 //airport button

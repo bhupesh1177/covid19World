@@ -24,6 +24,12 @@ for i in L:
     data1['deathValue'] = deathCount
     json_data = json.dumps(data1)
     jsonList.append(json_data)
-        
-with open('worldAddedData.json', 'w', encoding='utf-8') as f:
+         
+    
+with open('cumiData.txt', 'w', encoding='utf-8') as f:
+    f.write("var worldAddedData = ")
     json.dump(jsonList, f, ensure_ascii=False, indent=4)    
+
+with open('cumiData.txt', 'r') as infile, open('js/worldAddedData.js', 'w') as outfile:
+    temp = infile.read().replace("\\", "").replace("\"{", "{").replace("}\"","}")
+    outfile.write(temp)

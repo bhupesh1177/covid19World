@@ -27,5 +27,10 @@ for i in L:
     json_data = json.dumps(data1)
     jsonList.append(json_data)
         
-with open('data.json', 'w', encoding='utf-8') as f:
+with open('data.txt', 'w', encoding='utf-8') as f:
+    f.write("var covid19Data = ")
     json.dump(jsonList, f, ensure_ascii=False, indent=4)    
+
+with open('data.txt', 'r') as infile, open('js/data.js', 'w') as outfile:
+    temp = infile.read().replace("\\", "").replace("\"{", "{").replace("}\"","}").replace("_", " ")
+    outfile.write(temp)

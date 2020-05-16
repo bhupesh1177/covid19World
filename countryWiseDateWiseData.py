@@ -28,5 +28,10 @@ for i in L:
         jsonList.append(json_data)
     data1[i] = jsonList
         
-with open('countryWiseDateWiseData.json', 'w', encoding='utf-8') as f:
+with open('wisewise.txt', 'w', encoding='utf-8') as f:
+    f.write("var cWDW = ")
     json.dump(data1, f, ensure_ascii=False, indent=4)    
+
+with open('wisewise.txt', 'r') as infile, open('js/countryWiseDateWiseData.js', 'w') as outfile:
+    temp = infile.read().replace("\\", "").replace("\"{", "{").replace("}\"","}").replace("_", " ")
+    outfile.write(temp)
