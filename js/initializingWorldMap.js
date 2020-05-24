@@ -140,6 +140,21 @@ polygonTemplate.events.on("hit", function(ev) {
     }
   }
 
+ /** 
+  var myNews = newsData;
+  var ndd = document.getElementById("newsDataDiv");
+  var newsString = "<h2>" + "Containment measures taken by " + data.name + "</h2>";
+
+  if (myNews[data.id] != null) {
+    for (var i=0; i<myNews[data.id].length; i++) {
+      newsString = newsString + "<p>" +"<b>"+ myNews[data.id][i].dateAnnounced +"</b>"+":"+ myNews[data.id][i].news + "</p>";
+    }
+    ndd.innerHTML = newsString;
+  } else {
+    newsString = newsString + "<p>" +"<b>"+ "No data available yet for "+data.name +"</b>"+"</p>";
+    ndd.innerHTML = newsString;
+  }
+   */
   if (data.value != null) {
   var info = document.getElementById("info");
   info.innerHTML = "<h3 style=\"margin-left : 7px;\">" + data.id +"(" + data.name + ")" + "</h3>"+
